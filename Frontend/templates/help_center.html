@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% extends 'home.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container">
+    <div class="row column_title">
+        <div class="col-md-12">
+            <div class="page_title">
+                <h2>Help Center</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center pt-2" style="margin-top:50px; margin-bottom:100px;">
+        <div class="col-8 p-3 mb-2 bg-white text-dark white_shd full">
+
+            <form method="post" action="{% url 'help_center_mail' %}">
+                         {% csrf_token %}
+                <h3>Something went wrong?</h3>
+
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput1" name="userid" placeholder="UserId" type="hidden"
+                           value="{{request.session.userid}}">
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput2" name="name"
+                           value="{{ profile.Name }}" required>
+                    <label for="floatingInput2">Full Name</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput3" name="email" type="email"
+                           value="{{profile.Email}}" required>
+                    <label for="floatingInput3">Email</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select aria-label="Floating label select example" class="form-select" id="floatingSelect" name="issue" required>
+                        <option disabled selected>--Select an issue--</option>
+                        <option value="Disabled">My Clikznet account got disabled</option>
+                        <option value="Hacked">My Clikznet account got hacked</option>
+                        <option value="Technical">Technical issues with Clikznet services</option>
+                        <option value="Privacy">Privacy concerns or data security</option>
+                        <option value="Feedback">I want to provide feedback</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <label for="floatingSelect">What's the issue?</label>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="floatingTA" name="details" placeholder="Please include as much info as possible.. "
+                              rows="5" required></textarea><br>
+                    <label for="floatingTA">Details(Please include as much info as possible)</label>
+                </div>
+
+                <button class="form-control main_bt" style="height: 60px;" type="submit">Report</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}
+
